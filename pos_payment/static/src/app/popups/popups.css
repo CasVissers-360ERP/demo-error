@@ -1,0 +1,314 @@
+/* Payment Register Popup Styles */
+.payment-register-popup .modal-body {
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+.payment-register-container {
+    padding: 0.5rem;
+}
+
+/* Selected Invoices Section */
+.selected-invoices-summary {
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 1rem;
+}
+
+.invoices-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.invoice-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    padding: 0.875rem 1rem;
+    border-radius: 6px;
+    border: 1px solid #e0e0e0;
+    transition: all 0.2s ease;
+}
+
+.invoice-item:hover {
+    border-color: #017e84;
+    box-shadow: 0 2px 4px rgba(1, 126, 132, 0.1);
+}
+
+.invoice-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.invoice-number {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: #1a1a1a;
+}
+
+.invoice-customer {
+    font-size: 0.8rem;
+    color: #6c757d;
+}
+
+.invoice-amount {
+    font-weight: 600;
+    font-size: 1rem;
+    color: #017e84;
+    background: #e8f5f6;
+    padding: 0.375rem 0.875rem;
+    border-radius: 20px;
+}
+
+.total-summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    padding: 1rem 1.25rem;
+    border-radius: 6px;
+    border: 2px solid #017e84;
+}
+
+.total-label {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: #1a1a1a;
+}
+
+.total-amount {
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: #017e84;
+}
+
+/* Payment Details Form */
+.payment-details-form {
+    padding: 1rem 0;
+}
+
+.form-label-custom {
+    display: block;
+    font-weight: 500;
+    font-size: 0.875rem;
+    color: #495057;
+    margin-bottom: 0.5rem;
+}
+
+.form-select-custom {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    border: 2px solid #dee2e6;
+    border-radius: 6px;
+    background-color: white;
+    transition: all 0.2s ease;
+}
+
+.form-select-custom:focus {
+    outline: none;
+    border-color: #017e84;
+    box-shadow: 0 0 0 3px rgba(1, 126, 132, 0.1);
+}
+
+.amount-input-wrapper {
+    display: flex;
+    align-items: center;
+    border: 2px solid #dee2e6;
+    border-radius: 6px;
+    background: white;
+    transition: all 0.2s ease;
+    overflow: hidden;
+}
+
+.amount-input-wrapper:focus-within {
+    border-color: #017e84;
+    box-shadow: 0 0 0 3px rgba(1, 126, 132, 0.1);
+}
+
+.currency-symbol {
+    padding: 0.75rem 1rem;
+    background: #f8f9fa;
+    font-weight: 600;
+    color: #495057;
+    border-right: 2px solid #dee2e6;
+}
+
+.amount-input {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    font-size: 1.125rem;
+    font-weight: 600;
+    border: none;
+    outline: none;
+    text-align: left;
+    background: transparent;
+}
+
+.amount-input::placeholder {
+    color: #adb5bd;
+    font-weight: 400;
+}
+
+/* Payment Summary Box */
+.payment-summary-box {
+    background: linear-gradient(135deg, #017e84 0%, #019ca5 100%);
+    border-radius: 8px;
+    padding: 1.25rem;
+    box-shadow: 0 4px 12px rgba(1, 126, 132, 0.2);
+}
+
+.summary-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.summary-item {
+    flex: 1;
+    text-align: center;
+}
+
+.summary-label {
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 500;
+}
+
+.summary-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: white;
+}
+
+.summary-divider {
+    width: 2px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 1px;
+}
+
+/* Button Styling */
+.payment-register-popup .modal-footer .btn {
+    padding: 0.75rem 2rem;
+    font-weight: 600;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+.payment-register-popup .modal-footer .btn-primary {
+    background: #017e84;
+    border-color: #017e84;
+}
+
+.payment-register-popup .modal-footer .btn-primary:hover:not(:disabled) {
+    background: #016169;
+    border-color: #016169;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(1, 126, 132, 0.3);
+}
+
+.payment-register-popup .modal-footer .btn-secondary {
+    background: #6c757d;
+    border-color: #6c757d;
+}
+
+.payment-register-popup .modal-footer .btn-secondary:hover {
+    background: #5a6268;
+    border-color: #5a6268;
+}
+
+
+
+/* Invoice List Popup Styles */
+.invoice-list-popup .modal-body {
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+.invoice-list-popup .invoice-table {
+    margin-bottom: 0;
+}
+
+.invoice-list-popup .invoice-table thead {
+    position: sticky;
+    top: 0;
+    background-color: #f8f9fa;
+    z-index: 10;
+}
+
+.invoice-list-popup .invoice-table tbody tr {
+    transition: background-color 0.2s ease;
+}
+
+.invoice-list-popup .invoice-table tbody tr:hover {
+    background-color: #e9ecef !important;
+}
+
+.invoice-list-popup .invoice-table tbody tr.table-active {
+    background-color: #cfe2ff !important;
+}
+
+.invoice-list-popup .invoice-summary {
+    border: 2px solid #dee2e6;
+}
+
+/* Status Badge Styles with Better Contrast */
+.invoice-list-popup .badge.bg-danger {
+    background-color: #dc3545 !important;
+    color: #ffffff !important;
+    font-weight: 600 !important;
+    font-size: 0.75rem !important;
+    padding: 0.375rem 0.75rem !important;
+    border-radius: 4px !important;
+}
+
+.invoice-list-popup .badge.bg-warning {
+    background-color: #fd7e14 !important;
+    color: #ffffff !important;
+    font-weight: 600 !important;
+    font-size: 0.75rem !important;
+    padding: 0.375rem 0.75rem !important;
+    border-radius: 4px !important;
+}
+
+
+
+/* Payment Register Popup Styles */
+.payment-register-popup .modal-body {
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+.payment-register-popup .list-group-item {
+    border-left: 4px solid #0d6efd;
+}
+
+.payment-register-popup .payment-summary {
+    border: 2px solid #0dcaf0;
+}
+
+.payment-register-popup .total-summary {
+    border: 2px solid #0d6efd;
+}
+
+
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .invoice-list-popup .invoice-table {
+        font-size: 0.875rem;
+    }
+    
+    .invoice-list-popup .invoice-table th,
+    .invoice-list-popup .invoice-table td {
+        padding: 0.5rem 0.25rem;
+    }
+}

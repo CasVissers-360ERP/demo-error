@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Action for Session Closing Details -->
+    <record id="action_pos_session_closing_details" model="ir.actions.act_window">
+        <field name="name">Session Closing Details</field>
+        <field name="res_model">pos.session</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('state', '=', 'closed')]</field>
+        <field name="help">View all closed POS sessions with invoice payments and cash details</field>
+    </record>
+
+    <!-- List View for Session Closing Details -->
+    <record id="view_pos_session_closing_list" model="ir.ui.view">
+        <field name="name">pos.session.closing.list</field>
+        <field name="model">pos.session</field>
+        <field name="arch" type="xml">
+            <list string="Session Closing Details" create="0" edit="0">
+                <field name="name" string="Session ID"/>
+                <field name="config_id" string="Point of Sale"/>
+                <field name="user_id" string="Cashier"/>
+                <field name="stop_at" string="Closed Date"/>
+                <field name="order_count" string="Orders"/>
+                <field name="invoice_payment_count" string="Invoice Payments"/>
+                <field name="cash_register_balance_end_real" string="Cash Counted"/>
+                <field name="state"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View for Session Closing Details -->
+    <record id="view_pos_session_closing_details_form" model="ir.ui.view">
+        <field name="name">pos.session.closing.details.form</field>
+        <field name="model">pos.session</field>
+        <field name="arch" type="xml">
+            <form create="0" edit="0" delete="0">
+                <sheet>
+                    <div class="alert alert-info" role="alert">
+                        <strong>Closed Session Details</strong>
+                    </div>
+                    <group>
+                        <group string="Session Information">
+                            <field name="name" readonly="1"/>
+                            <field name="config_id" readonly="1"/>
+                            <field name="user_id" readonly="1"/>
+                            <field name="start_at" readonly="1"/>
+                            <field name="stop_at" readonly="1"/>
+                        </group>
+                        <group string="Order &amp; Payment Summary">
+                            <field name="order_count" readonly="1"/>
+                            <field name="invoice_payment_count" readonly="1"/>
+                        </group>
+                    </group>
+                    <separator string="Cash Register Details"/>
+                    <group>
+                        <group string="Opening Balance">
+                            <field name="cash_register_balance_start" readonly="1"/>
+                        </group>
+                        <group string="Closing Balance">
+                            <field name="cash_register_balance_end_real" readonly="1" widget="monetary"/>
+                            <field name="cash_register_difference" readonly="1" widget="monetary"/>
+                        </group>
+                    </group>
+                    <separator string="Payment Breakdown"/>
+                    <group>
+                        <group string="Invoice Payments">
+                            <field name="invoice_payment_amount_cash" readonly="1" widget="monetary" string="Invoice Payment - Cash"/>
+                            <field name="invoice_payment_amount_bank" readonly="1" widget="monetary" string="Invoice Payment - Bank"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Menu Item for Session Closing Details -->
+    <menuitem
+        id="menu_pos_session_closing_details"
+        name="Session Closing Details"
+        parent="point_of_sale.menu_point_of_sale"
+        action="action_pos_session_closing_details"
+        sequence="3"
+        groups="point_of_sale.group_pos_manager"
+        />
+</odoo>

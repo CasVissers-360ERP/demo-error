@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="pos_payment.PaymentRegisterPopup">
+        <Dialog title="props.title" size="'lg'">
+            <div class="payment-register-popup">
+                <div class="payment-register-container">
+                    <!-- Selected Invoices Summary -->
+                    <div class="selected-invoices-summary mb-4">
+                        <h6 class="text-uppercase text-muted mb-3" style="font-size: 0.75rem; font-weight: 600; letter-spacing: 0.5px;">Selected Invoices</h6>
+                        <div class="invoices-list">
+                            <div t-foreach="props.invoices" t-as="invoice" t-key="invoice.id"
+                                 class="invoice-item">
+                                <div class="invoice-info">
+                                    <div class="invoice-number"><t t-esc="invoice.name"/></div>
+                                    <div class="invoice-customer"><t t-esc="invoice.partner_id[1]"/></div>
+                                </div>
+                                <div class="invoice-amount">
+                                    <t t-esc="env.utils.formatCurrency(invoice.amount_residual)"/>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="total-summary">
+                            <div class="total-label">Total Invoice Due Amount:</div>
+                            <div class="total-amount">
+                                <t t-esc="env.utils.formatCurrency(props.totalAmount)"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Payment Details Form -->
+                    <div class="payment-details-form">
+                        <h6 class="text-uppercase text-muted mb-3" style="font-size: 0.75rem; font-weight: 600; letter-spacing: 0.5px;">Payment Details</h6>
+                        
+                        <!-- Payment Journal Selection -->
+                        <div class="form-group mb-3">
+                            <label for="payment-journal" class="form-label-custom">Payment Journal *</label>
+                            <select id="payment-journal" 
+                                    class="form-select-custom"
+                                    t-model="state.selectedJournalId"
+                                    t-on-change="onJournalChange">
+                                <option value="">-- Select Journal --</option>
+                                <t t-foreach="paymentJournals" t-as="journal" t-key="journal.id">
+                                    <option t-att-value="journal.id" 
+                                            t-att-selected="state.selectedJournalId === journal.id">
+                                        <t t-esc="journal.name"/>
+                                    </option>
+                                </t>
+                            </select>
+                        </div>
+
+                        <!-- Payment Amount -->
+                        <div class="form-group mb-4">
+                            <label for="payment-amount" class="form-label-custom">Payment Amount *</label>
+                            <div class="amount-input-wrapper">
+                                <span class="currency-symbol">
+                                    <t t-esc="pos.currency.symbol"/>
+                                </span>
+                                <input type="number" 
+                                       id="payment-amount"
+                                       class="amount-input"
+                                       t-att-value="state.paymentAmount"
+                                       t-on-change="onAmountChange"
+                                       step="0.01"
+                                       min="0"
+                                       placeholder="100"/>
+                            </div>
+                        </div>
+
+                        <!-- Payment Summary -->
+                        <div class="payment-summary-box">
+                            <div class="summary-row">
+                                <div class="summary-item paying">
+                                    <div class="summary-label">Paying</div>
+                                    <div class="summary-value">
+                                        <t t-esc="env.utils.formatCurrency(state.paymentAmount)"/>
+                                    </div>
+                                </div>
+                                <div class="summary-divider"></div>
+                                <div class="summary-item remaining">
+                                    <div class="summary-label">Remaining</div>
+                                    <div class="summary-value">
+                                        <t t-esc="env.utils.formatCurrency(Math.max(0, props.totalAmount - state.paymentAmount))"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <t t-set-slot="footer">
+                    <button class="btn btn-secondary btn-lg" 
+                            t-on-click="cancel"
+                            t-att-disabled="state.isProcessing">
+                        Cancel
+                    </button>
+                    <button class="btn btn-primary btn-lg" 
+                            t-on-click="confirm"
+                            t-att-disabled="state.isProcessing or !state.selectedJournalId or state.paymentAmount &lt;= 0">
+                        <t t-if="state.isProcessing">
+                            <i class="fa fa-spinner fa-spin me-1"/>
+                            Processing...
+                        </t>
+                        <t t-else="">
+                            <i class="fa fa-check me-1"/>
+                            Apply Payment
+                        </t>
+                    </button>
+                </t>
+            </div>
+        </Dialog>
+    </t>
+</templates>

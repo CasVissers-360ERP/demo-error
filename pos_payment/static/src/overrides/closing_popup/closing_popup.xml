@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="point_of_sale.ClosePosPopup" t-inherit="point_of_sale.ClosePosPopup" t-inherit-mode="extension">
+        <!-- Add Invoice Payments section after Cash In/Out breakdown - grouped by type -->
+        <xpath expr="//div[hasclass('payment-methods-overview')]//PaymentMethodBreakdown[@title.translate='Cash In / Out']" position="after">
+            <!-- Show invoice payments - cash if there are any -->
+            <div t-if="props.default_cash_details and props.default_cash_details.invoice_payment_amount_cash and props.default_cash_details.invoice_payment_amount_cash > 0" 
+                 class="d-flex align-items-center justify-content-between text-muted border-start ps-2 mt-1">
+                <span>Invoice Payments - Cash</span>
+                <span class="align-top" t-esc="env.utils.formatCurrency(props.default_cash_details.invoice_payment_amount_cash)"/>
+            </div>
+            <!-- Show invoice payments - bank if there are any -->
+            <div t-if="props.default_cash_details and props.default_cash_details.invoice_payment_amount_bank and props.default_cash_details.invoice_payment_amount_bank > 0" 
+                 class="d-flex align-items-center justify-content-between text-muted border-start ps-2">
+                <span>Invoice Payments - Bank</span>
+                <span class="align-top" t-esc="env.utils.formatCurrency(props.default_cash_details.invoice_payment_amount_bank)"/>
+            </div>
+        </xpath>
+
+        <!-- pos_hr employee mode: after the "Cash in/out" breakdown injected by pos_hr -->
+        <xpath expr="//PaymentMethodBreakdown[@title.translate='Cash in/out']" position="after">
+            <div t-if="props.default_cash_details and props.default_cash_details.invoice_payment_amount_cash and props.default_cash_details.invoice_payment_amount_cash > 0"
+                 class="d-flex align-items-center justify-content-between text-muted border-start ps-2 mt-1">
+                <span>Invoice Payments - Cash</span>
+                <span class="align-top" t-esc="env.utils.formatCurrency(props.default_cash_details.invoice_payment_amount_cash)"/>
+            </div>
+            <div t-if="props.default_cash_details and props.default_cash_details.invoice_payment_amount_bank and props.default_cash_details.invoice_payment_amount_bank > 0"
+                 class="d-flex align-items-center justify-content-between text-muted border-start ps-2">
+                <span>Invoice Payments - Bank</span>
+                <span class="align-top" t-esc="env.utils.formatCurrency(props.default_cash_details.invoice_payment_amount_bank)"/>
+            </div>
+        </xpath>
+        
+        <!-- Also add invoice payment section at the end of payment-methods-overview for cases without cash control -->
+        <xpath expr="//div[hasclass('payment-methods-overview')]" position="inside">
+            <div t-if="!pos.config.cash_control and props.invoice_payment_amount and props.invoice_payment_amount > 0" 
+                 class="w-100 mb-3">
+                <div class="d-flex align-items-center justify-content-between fs-3">
+                    <span>Invoice Payments</span>
+                    <span t-esc="env.utils.formatCurrency(props.invoice_payment_amount)"/>
+                </div>
+            </div>
+        </xpath>
+    </t>
+
+</templates>

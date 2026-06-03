@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="pos_payment.InvoiceListPopup">
+        <Dialog title="props.title" size="'xl'">
+            <div class="invoice-list-popup">
+                <div class="invoice-list-container">
+                    <t t-if="props.invoices.length === 0">
+                        <div class="alert alert-info">
+                            <i class="fa fa-info-circle"/> No unpaid invoices found.
+                        </div>
+                    </t>
+                    <t t-else="">
+                        <table class="table table-striped invoice-table">
+                            <thead>
+                                <tr>
+                                    <th width="5%">
+                                        <input type="checkbox" disabled="true"/>
+                                    </th>
+                                    <th width="20%">Invoice</th>
+                                    <th width="25%">Customer</th>
+                                    <th width="15%">Date</th>
+                                    <th width="10%">Status</th>
+                                    <th width="12%" class="text-end">Total Amount</th>
+                                    <th width="13%" class="text-end">Amount Due</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="props.invoices" t-as="invoice" t-key="invoice.id"
+                                    t-att-class="{'table-active': isSelected(invoice)}"
+                                    t-on-click="() => this.toggleInvoice(invoice)"
+                                    style="cursor: pointer;">
+                                    <td>
+                                        <input type="checkbox" 
+                                               t-att-checked="isSelected(invoice)"
+                                               t-on-click.stop="() => this.toggleInvoice(invoice)"/>
+                                    </td>
+                                    <td><t t-esc="invoice.name"/></td>
+                                    <td><t t-esc="invoice.partner_id[1]"/></td>
+                                    <td><t t-esc="getFormattedDate(invoice.invoice_date)"/></td>
+                                    <td>
+                                        <span t-attf-class="badge bg-{{invoice.payment_state === 'not_paid' ? 'danger' : 'warning'}}">
+                                            <t t-esc="getPaymentStateLabel(invoice.payment_state)"/>
+                                        </span>
+                                    </td>
+                                    <td class="text-end">
+                                        <t t-esc="env.utils.formatCurrency(invoice.amount_total)"/>
+                                    </td>
+                                    <td class="text-end">
+                                        <t t-esc="env.utils.formatCurrency(invoice.amount_residual)"/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        <div class="invoice-summary mt-3 p-3 bg-light rounded">
+                            <div class="row">
+                                <div class="col-6">
+                                    <strong>Selected Invoices:</strong>
+                                    <t t-esc="getSelectedInvoices().length"/>
+                                </div>
+                                <div class="col-6 text-end">
+                                    <strong>Total Amount:</strong>
+                                    <span class="text-primary fs-5 ms-2">
+                                        <t t-esc="env.utils.formatCurrency(getTotalAmount())"/>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </div>
+                <t t-set-slot="footer">
+                    <button class="btn btn-secondary" t-on-click="cancel">
+                        Cancel
+                    </button>
+                    <button class="btn btn-primary" 
+                            t-on-click="confirm"
+                            t-att-disabled="getSelectedInvoices().length === 0">
+                        <i class="fa fa-money me-1"/> Register Payment
+                    </button>
+                </t>
+            </div>
+        </Dialog>
+    </t>
+</templates>
