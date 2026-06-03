@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- The afroep "marker" product that is sold on the order line. -->
+    <record id="product_afroep_demo" model="product.product">
+        <field name="name">Afroep (Demo)</field>
+        <field name="type">consu</field>
+        <field name="is_afroep_product" eval="True" />
+        <field name="list_price">100.0</field>
+        <field name="invoice_policy">order</field>
+    </record>
+
+    <!-- The storable product actually reserved in the warehouse. -->
+    <record id="product_reserve_demo" model="product.product">
+        <field name="name">Steel Bolt M8 (Demo)</field>
+        <field name="type">consu</field>
+        <field name="is_storable" eval="True" />
+    </record>
+
+    <record id="stock_quant_reserve_demo" model="stock.quant">
+        <field name="product_id" ref="product_reserve_demo" />
+        <field name="location_id" ref="stock.stock_location_stock" />
+        <field name="quantity">100.0</field>
+    </record>
+</odoo>

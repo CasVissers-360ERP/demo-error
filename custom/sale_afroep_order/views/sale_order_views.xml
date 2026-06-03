@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_order_form_afroep" model="ir.ui.view">
+        <field name="name">sale.order.form.afroep</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form" />
+        <field name="arch" type="xml">
+            <button name="action_confirm" position="before">
+                <field name="can_reserve_afroep" invisible="1" />
+                <button
+                    name="action_reserve_afroep"
+                    type="object"
+                    string="Reserve Afroep Stock"
+                    help="Create a stock reservation for every afroep (call-off) line."
+                    invisible="not can_reserve_afroep"
+                />
+            </button>
+            <xpath
+                expr="//field[@name='order_line']/list/field[@name='product_uom_qty']"
+                position="after"
+            >
+                <field name="is_afroep_line" column_invisible="1" />
+                <field
+                    name="afroep_reserve_product_id"
+                    string="Reserve Product"
+                    optional="show"
+                    readonly="not is_afroep_line"
+                    required="is_afroep_line"
+                    options="{'no_create': True}"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>
