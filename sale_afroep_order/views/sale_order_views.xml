@@ -5,16 +5,22 @@
         <field name="model">sale.order</field>
         <field name="inherit_id" ref="sale.view_order_form" />
         <field name="arch" type="xml">
-            <button name="action_confirm" position="before">
-                <field name="can_reserve_afroep" invisible="1" />
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <field name="has_afroep_line" invisible="1" />
                 <button
-                    name="action_reserve_afroep"
+                    name="action_view_afroep_reservations"
                     type="object"
-                    string="Reserve Afroep Stock"
-                    help="Create a stock reservation for every afroep (call-off) line."
-                    invisible="not can_reserve_afroep"
-                />
-            </button>
+                    class="oe_stat_button"
+                    icon="fa-lock"
+                    invisible="not has_afroep_line"
+                >
+                    <field
+                        name="afroep_reservation_count"
+                        widget="statinfo"
+                        string="Reservations"
+                    />
+                </button>
+            </xpath>
             <xpath
                 expr="//field[@name='order_line']/list/field[@name='product_uom_qty']"
                 position="after"

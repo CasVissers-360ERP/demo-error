@@ -4,7 +4,7 @@
     "name": "Sale Afroep (Call-off) Order",
     "summary": "Sell call-off (afroep) products that stay reserved in the warehouse "
     "and are drawn down by later stock moves",
-    "version": "18.0.1.0.0",
+    "version": "18.0.1.1.0",
     "author": "360ERP",
     "category": "Sales/Warehouse",
     "license": "AGPL-3",
