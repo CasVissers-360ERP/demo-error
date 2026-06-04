@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="pos_stock_reserve.ControlButtons" t-inherit="point_of_sale.ControlButtons" t-inherit-mode="extension">
+        <xpath expr="//div[hasclass('control-buttons-modal')]" position="inside">
+            <t t-set="bookLine" t-value="pos.get_order() and pos.get_order().get_selected_orderline()" />
+            <button class="btn btn-secondary btn-lg py-5" t-on-click="() => this.onClickBookStock()">
+                <i class="fa fa-lock me-1" role="img" aria-label="Book Stock" title="Book Stock" />
+                <t t-if="bookLine and bookLine.uiState.bookedReservationId">Unbook Stock</t>
+                <t t-else="">Book Stock</t>
+            </button>
+        </xpath>
+    </t>
+</templates>
