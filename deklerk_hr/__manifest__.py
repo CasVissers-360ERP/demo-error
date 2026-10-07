@@ -12,7 +12,7 @@ indiensttreding) met wat standaard niet kan omdat het jaarlijks terugkeert of ve
 
 Elke signalering is een to-do activiteit op de medewerker voor de HR-verantwoordelijke.
 """,
-    "version": "20.0.1.0.0",
+    "version": "20.0.1.0.1",
     "category": "Human Resources/Employees",
     "author": "360 ERP",
     "license": "LGPL-3",

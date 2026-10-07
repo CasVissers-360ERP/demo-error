@@ -11,6 +11,11 @@ SALARY_NOTICE_DAYS = 30
 CERTIFICATE_NOTICE_DAYS = 60
 
 
+def _eur(amount):
+    """Dutch notation: € 4.350,00"""
+    return "€ " + f"{amount:,.2f}".translate(str.maketrans(",.", ".,"))
+
+
 def _next_anniversary(day, today):
     """Next occurrence of day's month/day on or after today (29 Feb falls on 28 Feb in other years)."""
     for year in (today.year, today.year + 1):
@@ -53,7 +58,7 @@ class HrEmployee(models.Model):
                 signals.append((version.date_version, self.env._(
                     "Salariswijziging %(name)s per %(date)s: %(old)s → %(new)s",
                     name=self.name, date=version.date_version.strftime("%d-%m-%Y"),
-                    old=f"€ {previous.wage:,.2f}", new=f"€ {version.wage:,.2f}")))
+                    old=_eur(previous.wage), new=_eur(version.wage))))
         for skill in self.employee_skill_ids.filtered(lambda s: s.skill_type_id.is_certification and s.valid_to):
             if today <= skill.valid_to <= today + relativedelta(days=CERTIFICATE_NOTICE_DAYS):
                 signals.append((skill.valid_to, self.env._(
