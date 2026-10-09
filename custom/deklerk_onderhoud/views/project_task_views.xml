@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_task_form2_planning_visit_ref" model="ir.ui.view">
+        <field name="name">project.task.form.planning_visit_ref</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_form2" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="planning_visit_ref" invisible="not planning_visit_ref" />
+            </xpath>
+            <xpath expr="//notebook" position="inside">
+                <page
+                    string="Bezoekrapport"
+                    name="visit_report"
+                    invisible="not planning_visit_ref"
+                >
+                    <group>
+                        <group>
+                            <field name="visit_origin" />
+                            <field name="visit_fertilized" />
+                            <field name="visit_pest_control" />
+                        </group>
+                        <group>
+                            <field name="visit_signed_by" />
+                            <field name="visit_signature" widget="signature" />
+                        </group>
+                    </group>
+                    <field name="visit_remarks" placeholder="Bijzonderheden" />
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

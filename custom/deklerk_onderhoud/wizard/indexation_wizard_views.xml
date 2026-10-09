@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_deklerk_indexation_wizard_form" model="ir.ui.view">
+        <field name="name">deklerk.indexation.wizard.form</field>
+        <field name="model">deklerk.indexation.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Indexatie onderhoudscontracten">
+                <div class="alert alert-info" role="alert" invisible="result">
+                    Nieuwe prijs = prijs × (100 + indexatiepercentage van de klant) / 100, op alle terugkerende regels
+                    (onderhoud per VE en lease). Klanten met 0% of die dit jaar al geïndexeerd zijn worden overgeslagen.
+                </div>
+                <group invisible="result">
+                    <field name="indexation_date" />
+                    <field name="order_ids" widget="many2many_tags" />
+                </group>
+                <field name="result" invisible="not result" />
+                <footer>
+                    <button
+                        name="action_apply"
+                        type="object"
+                        string="Indexeren"
+                        class="btn-primary"
+                        invisible="result"
+                    />
+                    <button string="Sluiten" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_deklerk_indexation_wizard" model="ir.actions.act_window">
+        <field name="name">Indexatie onderhoudscontracten</field>
+        <field name="res_model">deklerk.indexation.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="binding_model_id" ref="sale.model_sale_order" />
+        <field name="binding_view_types">list,form</field>
+        <field name="group_ids" eval="[(4, ref('sales_team.group_sale_manager'))]" />
+    </record>
+</odoo>

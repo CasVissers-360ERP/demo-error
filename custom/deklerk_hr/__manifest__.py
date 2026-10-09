@@ -1,3 +1,7 @@
+# Copyright 2026 360ERP (<https://www.360erp.com>)
+# License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl).
+
+
 {
     "name": "De Klerk - HR signalering",
     "summary": "Dagelijkse signalering: verjaardagen, jubilea, salariswijzigingen en verlopende certificaten",
