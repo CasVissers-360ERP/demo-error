@@ -5,7 +5,7 @@
     "summary": "At Once / Quickstrike / Futures and season on sales orders and invoices",
     "author": "360 ERP",
     "website": "https://github.com/CasVissers-360ERP/demo-error",
-    "version": "20.0.1.0.0",
+    "version": "20.0.1.0.1",
     "license": "LGPL-3",
     "category": "Sales",
     "depends": ["sale_management", "account"],
