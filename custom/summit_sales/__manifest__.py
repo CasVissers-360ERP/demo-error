@@ -10,7 +10,7 @@
     "category": "Sales",
     "depends": ["sale_management", "account"],
     "data": [
-        "security/ir.model.access.csv",
+        "security/ir.access.csv",
         "views/summit_season_views.xml",
         "views/sale_order_views.xml",
         "views/account_move_views.xml",
