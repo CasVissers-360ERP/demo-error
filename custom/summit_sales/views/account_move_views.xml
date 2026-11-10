@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_move_form" model="ir.ui.view">
+        <field name="name">account.move.form.summit</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form" />
+        <field name="arch" type="xml">
+            <field name="invoice_user_id" position="after">
+                <field name="summit_order_type" />
+                <field name="summit_season_id" />
+            </field>
+        </field>
+    </record>
+    <record id="view_invoice_tree" model="ir.ui.view">
+        <field name="name">account.move.list.summit</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_invoice_tree" />
+        <field name="arch" type="xml">
+            <field name="invoice_user_id" position="after">
+                <field
+                    name="summit_order_type"
+                    optional="show"
+                    column_invisible="context.get('default_move_type') not in ('out_invoice', 'out_refund')"
+                />
+                <field
+                    name="summit_season_id"
+                    optional="hide"
+                    column_invisible="context.get('default_move_type') not in ('out_invoice', 'out_refund')"
+                />
+            </field>
+        </field>
+    </record>
+    <record id="view_account_invoice_filter" model="ir.ui.view">
+        <field name="name">account.move.search.summit</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_account_invoice_filter" />
+        <field name="arch" type="xml">
+            <filter name="invoice_date" position="after">
+                <separator />
+                <filter name="summit_at_once" string="At Once" domain="[('summit_order_type', '=', 'at_once')]" />
+                <filter name="summit_quickstrike" string="Quickstrike" domain="[('summit_order_type', '=', 'quickstrike')]" />
+                <filter name="summit_futures" string="Futures" domain="[('summit_order_type', '=', 'futures')]" />
+            </filter>
+            <xpath expr="//search" position="inside">
+                <field name="summit_season_id" />
+                <group>
+                    <filter name="group_order_type" string="Order Type" context="{'group_by': 'summit_order_type'}" />
+                    <filter name="group_season" string="Season" context="{'group_by': 'summit_season_id'}" />
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

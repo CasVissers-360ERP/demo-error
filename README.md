@@ -1,18 +1,19 @@
 # demo-error
 
-Odoo 20 maatwerk voor de De Klerk demo, ingericht volgens de 360ERP-repostructuur
+Odoo 20 demo for Summit Distribution (Benelux distribution office for Nike tennis/padel and Nike SB skate,
+working with sales agents per country). Follows the 360ERP repo structure
 ([360ERP/oca-addons-repo-template](https://github.com/360ERP/oca-addons-repo-template), Odoo 20.0).
 
-| Map | Inhoud |
+| Path | Content |
 |---|---|
-| `custom/deklerk_onderhoud` | Onderhoudsgegevens op de contractregel voor de externe planningstool (locatie, contractvorm, bezoeken p.j., normtijd via klantklasse A/B/C, kleine route), uniek bezoek-ID + bezoekrapport op taken, jaarlijkse indexatie per klant, logistiek per locatie, contactrollen, PO-status. |
-| `custom/deklerk_hr` | Dagelijkse HR-signalering: verjaardagen, jubilea (12,5/25/40 jaar), salariswijzigingen, verlopende certificaten. |
+| `custom/summit_sales` | Order type (At Once / Quickstrike / Futures) and season on sales orders, copied to the invoice. Seasons under Sales > Configuration. |
+| `360_ai_client` | Submodule 360ERP/360_ai_client (20.0): Maatje (`ai_x360_client_install`). |
 
 ## Odoo.sh
 
-Odoo.sh zet alleen de root van de repository en submodules op het addons-pad. Daarom staan in de root
-symlinks naar de modules in `custom/` (`deklerk_onderhoud -> custom/deklerk_onderhoud`, ...). Nieuwe module:
-`ln -s custom/<module> <module>`.
+Odoo.sh only puts the repository root and submodules on the addons path. Modules in `custom/` therefore have a
+root symlink (`summit_sales -> custom/summit_sales`). New module: `ln -s custom/<module> <module>`.
+The private submodule needs the Odoo.sh deploy key on 360ERP/360_ai_client.
 
 ## Pre-commit
 

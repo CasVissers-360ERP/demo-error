@@ -1,0 +1,4 @@
+[submodule "360_ai_client"]
+	path = 360_ai_client
+	url = git@github.com:360ERP/360_ai_client.git
+	branch = 20.0
